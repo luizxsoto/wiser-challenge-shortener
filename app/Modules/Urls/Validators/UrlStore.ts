@@ -1,12 +1,14 @@
 import { rules, schema } from '@ioc:Adonis/Core/Validator'
 
-import { TValidatorResponse } from 'App/Shared/Providers/Validator/@Types/TValidatorResponse'
-import { TUrlObject, TUrlStoreObject } from 'App/Modules/Urls/@Types/TUrl'
-
 import ValidatorProvider from 'App/Shared/Providers/Validator'
 
+import { IStoreUrlDTO } from '../Dtos/IUrl'
+
+import { TValidatorResponse } from 'App/Shared/Providers/Validator/@Types/TValidatorResponse'
+import { TUrlObject } from 'App/Modules/Urls/@Types/TUrl'
+
 class UrlStoreValidator {
-  protected ValidatorProvider: ValidatorProvider<TUrlStoreObject>
+  protected ValidatorProvider: ValidatorProvider<IStoreUrlDTO['registers'][0]>
 
   constructor() {
     this.ValidatorProvider = new ValidatorProvider()
@@ -16,10 +18,10 @@ class UrlStoreValidator {
     registers,
     registersFinded,
   }: {
-    registers: TUrlStoreObject[]
+    registers: IStoreUrlDTO['registers']
     registersFinded: TUrlObject[]
-  }): Promise<TValidatorResponse<TUrlStoreObject>[]> {
-    const registersValidated: TValidatorResponse<TUrlStoreObject>[] = []
+  }): Promise<TValidatorResponse<IStoreUrlDTO['registers'][0]>[]> {
+    const registersValidated: TValidatorResponse<IStoreUrlDTO['registers'][0]>[] = []
     for (const register of registers) {
       const storeRules = {
         url: schema.string({}, [
@@ -29,6 +31,7 @@ class UrlStoreValidator {
             register,
             registers: registersFinded,
             fields: ['url'],
+            message: ' or has not expired yet',
           }),
           rules.compoundDistinct({
             register,

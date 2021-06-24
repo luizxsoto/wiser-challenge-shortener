@@ -5,7 +5,7 @@ class EncryptorProvider {
     const randomLength = Math.floor(Math.random() * (MAX_LENGTH - MIN_LENGTH + 1)) + MIN_LENGTH
 
     let text = ''
-    while (text.length <= randomLength)
+    while (text.length < randomLength)
       text += POSSIBLE_STRING.charAt(Math.floor(Math.random() * POSSIBLE_STRING.length))
 
     return text

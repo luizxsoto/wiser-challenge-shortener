@@ -1,4 +1,4 @@
-import { TUrlObject, TUrlStoreObject } from 'App/Modules/Urls/@Types/TUrl'
+import { TUrlObject } from 'App/Modules/Urls/@Types/TUrl'
 
 import { IShowUrlDTO, IStoreUrlDTO } from 'App/Modules/Urls/Dtos/IUrl'
 
@@ -42,9 +42,9 @@ class UrlLucidRepositories {
     return register
   }
 
-  public async findForStoreValidator(FindForStoreValidatorData: {
-    registers: TUrlStoreObject[]
-  }): Promise<{ registersFinded: TUrlObject[] }> {
+  public async findForStoreValidator(
+    FindForStoreValidatorData: IStoreUrlDTO
+  ): Promise<{ registersFinded: TUrlObject[] }> {
     const registers = await this.FindForStoreValidatorLucidRepository.execute(
       FindForStoreValidatorData
     )
