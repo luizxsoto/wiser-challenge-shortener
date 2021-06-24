@@ -22,4 +22,4 @@
   ```
 
 - Business Rules
-- [x] Expiration date: 30 seconds
+- [x] Shortened url expiration date: 60 seconds
