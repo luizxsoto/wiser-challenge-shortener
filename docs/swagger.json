@@ -1,0 +1,232 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "wiser-challenge-shortener",
+    "version": "1.0.0",
+    "description": "Wiser Challenge Shortener"
+  },
+  "tags": ["/urls"],
+  "paths": {
+    "/urls/{new_url}": {
+      "get": {
+        "tags": ["/urls"],
+        "summary": "Show New Url",
+        "description": "Show New Url generated on POST to redirect to original Url",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/NewUrl"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Will be redirected to original Url"
+          },
+          "400": {
+            "$ref": "#/components/responseBodies/E_VALIDATION_FAILURE"
+          },
+          "500": {
+            "$ref": "#/components/responseBodies/E_UNRECOGNIZED"
+          }
+        }
+      }
+    },
+    "/urls": {
+      "post": {
+        "tags": ["/urls"],
+        "summary": "Create Url",
+        "description": "Create Url and generetate a shortened url",
+        "requestBody": {
+          "$ref": "#/components/requestBodies/UrlCreate"
+        },
+        "responses": {
+          "207": {
+            "$ref": "#/components/responseBodies/UrlCreate"
+          },
+          "400": {
+            "$ref": "#/components/responseBodies/E_VALIDATION_FAILURE"
+          },
+          "500": {
+            "$ref": "#/components/responseBodies/E_UNRECOGNIZED"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "parameters": {
+      "NewUrl": {
+        "name": "new_url",
+        "description": "New Url generated on POST",
+        "in": "path",
+        "required": true,
+        "type": "string",
+        "example": "abc123ab"
+      }
+    },
+    "requestBodies": {
+      "UrlCreate": {
+        "description": "Data Array to Create a new Url",
+        "required": true,
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Url/RequestCreate"
+            }
+          }
+        }
+      }
+    },
+    "responseBodies": {
+      "UrlCreate": {
+        "description": "Data Array of Created or Validated Url",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/Url/ResponseCreate"
+            }
+          }
+        }
+      },
+      "E_VALIDATION_FAILURE": {
+        "description": "Validation Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "E_VALIDATION_FAILURE"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "A validation error occurred"
+                    },
+                    "validations": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "rule": {
+                            "type": "string",
+                            "example": "compoundExists"
+                          },
+                          "field": {
+                            "type": "string",
+                            "example": "new_url"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "This value is required"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "E_UNRECOGNIZED": {
+        "description": "Unrecognized Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "object",
+                  "properties": {
+                    "code": {
+                      "type": "string",
+                      "example": "E_UNRECOGNIZED"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Something wrong is not right"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "schemas": {
+      "Url": {
+        "Model": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "url": {
+              "type": "string",
+              "example": "http://wisereducacao.com"
+            },
+            "new_url": {
+              "type": "string",
+              "example": "http://localhost:8081/abc123ab"
+            },
+            "expires_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "created_at": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updated_at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        "RequestCreate": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "url": {
+                    "type": "string",
+                    "example": "http://wisereducacao.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "ResponseCreate": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "atype": "integer",
+                    "example": 200
+                  },
+                  "register": {
+                    "$ref": "#/components/schemas/Url/Model"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
