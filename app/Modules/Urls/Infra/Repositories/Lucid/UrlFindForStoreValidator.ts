@@ -23,7 +23,6 @@ class UrlFindForStoreValidatorAppRepository {
     const registerFindedJSON = registersFinded.map((registerFinded) =>
       registerFinded.toJSON()
     ) as TUrlObject[]
-    console.log({ registers, registerFindedJSON })
 
     return { registersFinded: registerFindedJSON }
   }

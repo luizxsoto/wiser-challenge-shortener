@@ -21,7 +21,9 @@
 
 ## :information_source: How To Use
 
-To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js >= v14.16.x][nodejs] and [Yarn v1.x][yarn] installed on your computer. From your command line:
+To clone and run this application, you'll need [Git](https://git-scm.com), [Node.js >= v14.16.x][nodejs] installed on your computer.
+
+From your command line:
 
 ```bash
 # Clone this repository
@@ -33,12 +35,14 @@ $ cd wiser-challenge-shortener
 # Install dependencies
 $ npm i
 
+# Test the app
+$ npm run test
+
 # Run the app
-$ node ace serve --watch
+$ npm run dev
 ```
 
 [nodejs]: https://nodejs.org/
-[yarn]: https://yarnpkg.com/
 [vc]: https://code.visualstudio.com/
 [vceditconfig]: https://marketplace.visualstudio.com/items?itemName=EditorConfig.EditorConfig
 [vceslint]: https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
