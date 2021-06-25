@@ -60,7 +60,7 @@ $ npm run dev
 - [x] Only letters and numbers
 - [x] Save in database
 - [x] Redirect when getting shortened url
-- [ ] Tests
+- [x] Tests
 
 - Expected behavior:
 
