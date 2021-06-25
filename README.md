@@ -12,9 +12,11 @@
 
 </div>
 
-## :rocket: Tecnologias
+## :rocket: Technologies
 
 - [AdonisV5](https://adonisjs.com/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Postgres](https://www.postgresql.org/)
 - [VS Code][vc] with [EditorConfig][vceditconfig], [ESLint][vceslint] and [Prettier][vcprettier]
 
 ## :information_source: How To Use
