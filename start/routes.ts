@@ -19,3 +19,4 @@
 */
 
 import 'App/Modules/Urls/Infra/Http/Routes/Url.routes'
+import 'App/Modules/Tests/Infra/Http/Routes/Test.routes'
