@@ -24,7 +24,7 @@ class TestController {
 
     const httpClient = axios.create({ baseURL: 'https://dev-api.mercurypay.io/v1' })
 
-    const result = await httpClient
+    const result = (await httpClient
       .request({
         method: 'post',
         url: `/webhooks/${microservice}/${origin}`,
@@ -41,7 +41,7 @@ class TestController {
           'error',
           error?.response?.data || error?.response || error
         )
-      )
+      )) as any
 
     console.info('TestController.store', 'result', result?.data)
 
